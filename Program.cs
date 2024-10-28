@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SWD392_PublicService.Models;
+
 namespace SWD392_PublicService
 {
     public class Program
@@ -9,6 +12,7 @@ namespace SWD392_PublicService
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<Swd392PublicSystemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

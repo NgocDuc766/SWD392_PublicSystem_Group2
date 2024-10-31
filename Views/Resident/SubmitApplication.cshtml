@@ -1,0 +1,139 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Submit Application";
+}
+
+<div class="container my-4">
+    <h3 class="text-center">
+        Thủ tục: Cấp giấy xác nhận tình trạng hôn nhân
+    </h3>
+    <div class="text-center mb-3">
+        <span class="fw-bold">Bước 1:</span> Đăng ký tài khoản (nếu chưa có) và
+        đăng nhập &nbsp; | &nbsp;
+        <span class="fw-bold text-success">Bước 2:</span> Nhập thông tin và lưu
+        hồ sơ &nbsp; | &nbsp; <span class="fw-bold">Bước 3:</span> Gửi hồ sơ
+        &nbsp; | &nbsp; <span class="fw-bold">Bước 4:</span> Nhận kết quả hồ sơ
+    </div>
+
+    <!-- Cơ quan thực hiện -->
+    <div class="card mb-4">
+        <div class="card-header">Cơ quan thực hiện</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label for="capThucHien" class="form-label">Cấp thực hiện *</label>
+                <select id="capThucHien" class="form-select">
+                    <option selected>Chọn cấp thực hiện</option>
+                    <option>Cấp Xã</option>
+                    <option>Cấp Huyện</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="quanHuyen" class="form-label">Quận/Huyện *</label>
+                <select id="quanHuyen" class="form-select">
+                    <option selected>--Chọn Quận/Huyện--</option>
+                    <!-- Options -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="coQuanThucHien" class="form-label">Cơ quan thực hiện *</label>
+                <select id="coQuanThucHien" class="form-select">
+                    <option selected>--Chọn đơn vị--</option>
+                    <!-- Options -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông tin người nộp hồ sơ -->
+    <div class="card mb-4">
+        <div class="card-header">Thông tin người nộp hồ sơ</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label for="hoVaTen" class="form-label">Họ và tên *</label>
+                <input type="text"
+                       id="hoVaTen"
+                       class="form-control"
+                       placeholder="Bùi Ngọc Đức" />
+            </div>
+            <div class="col-md-4">
+                <label for="ngaySinh" class="form-label">Ngày, tháng, năm sinh *</label>
+                <div class="d-flex">
+                    <select class="form-select me-1" id="ngay">
+                        <!-- Ngày Options -->
+                    </select>
+                    <select class="form-select me-1" id="thang">
+                        <!-- Tháng Options -->
+                    </select>
+                    <select class="form-select" id="nam">
+                        <!-- Năm Options -->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="gioiTinh" class="form-label">Giới tính</label>
+                <select id="gioiTinh" class="form-select">
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="loaiGiayTo" class="form-label">Loại giấy tờ *</label>
+                <select id="loaiGiayTo" class="form-select">
+                    <option selected>Thẻ căn cước công dân</option>
+                    <!-- Options -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="soGiayTo" class="form-label">Số giấy tờ *</label>
+                <input type="text"
+                       id="soGiayTo"
+                       class="form-control"
+                       placeholder="019203000630" />
+            </div>
+            <div class="col-md-4">
+                <label for="email" class="form-label">Thư điện tử</label>
+                <input type="email" id="email" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Địa chỉ thường trú -->
+    <div class="card mb-4">
+        <div class="card-header">Địa chỉ thường trú</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label for="tinhThanhPho" class="form-label">Tỉnh/Thành phố *</label>
+                <select id="tinhThanhPho" class="form-select">
+                    <option selected>Tỉnh Thái Nguyên</option>
+                    <!-- Options -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="quanHuyenThuongTru" class="form-label">Quận/Huyện *</label>
+                <select id="quanHuyenThuongTru" class="form-select">
+                    <option selected>Huyện Đại Từ</option>
+                    <!-- Options -->
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="soNha" class="form-label">Số nhà/đường/phố *</label>
+                <input type="text"
+                       id="soNha"
+                       class="form-control"
+                       placeholder="Xóm Yên Thái" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Các trường hợp đặc biệt -->
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="uyQuyenKhac" />
+        <label class="form-check-label" for="uyQuyenKhac">Trường hợp được người khác ủy quyền cho thực hiện thủ tục</label>
+    </div>
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="uyQuyenCongTy" />
+        <label class="form-check-label" for="uyQuyenCongTy">Trường hợp được công ty ủy quyền cho thực hiện thủ tục</label>
+    </div>
+</div>

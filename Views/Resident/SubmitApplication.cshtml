@@ -11,11 +11,9 @@
             Nộp hồ sơ theo yêu cầu
         </h3>
         <div class="text-center mb-3">
-            <span class="fw-bold">Bước 1:</span> Đăng ký tài khoản (nếu chưa có) và
-            đăng nhập &nbsp; | &nbsp;
-            <span class="fw-bold text-success">Bước 2:</span> Nhập thông tin và lưu
-            hồ sơ &nbsp; | &nbsp; <span class="fw-bold">Bước 3:</span> Gửi hồ sơ
-            &nbsp; | &nbsp; <span class="fw-bold">Bước 4:</span> Nhận kết quả hồ sơ
+            <span class="fw-bold">Bước 1:</span> Đăng ký tài khoản (nếu chưa có) và đăng nhập &nbsp; | &nbsp;
+            <span class="fw-bold text-success">Bước 2:</span> Nhập thông tin và lưu hồ sơ &nbsp; | &nbsp;
+            <span class="fw-bold">Bước 3:</span> Gửi hồ sơ &nbsp; | &nbsp; <span class="fw-bold">Bước 4:</span> Nhận kết quả hồ sơ
         </div>
 
         <!-- Cơ quan thực hiện -->
@@ -65,11 +63,7 @@
             <div class="card-body row g-3">
                 <div class="col-md-4">
                     <label for="hoVaTen" class="form-label">Họ và tên *</label>
-                    <input type="text"
-                           id="hoVaTen"
-                           name="hoVaTen"
-                           class="form-control"
-                           placeholder="Họ Và Tên" />
+                    <input type="text" id="hoVaTen" name="hoVaTen" class="form-control" placeholder="Họ Và Tên" />
                 </div>
                 <div class="col-md-4">
                     <label for="gioiTinh" class="form-label">Giới tính</label>
@@ -80,11 +74,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="soGiayTo" class="form-label">Số giấy tờ</label>
-                    <input type="text"
-                           id="soGiayTo"
-                           name="soGiayTo"
-                           class="form-control"
-                           placeholder="" />
+                    <input type="text" id="soGiayTo" name="soGiayTo" class="form-control" placeholder="" />
                 </div>
             </div>
         </div>
@@ -95,30 +85,36 @@
             <div class="card-body row g-3">
                 <div class="col-md-4">
                     <label for="tenDon" class="form-label">Tên đơn từ *</label>
-                    <input type="text"
-                           id="tenDon"
-                           name="tenDon"
-                           class="form-control"
-                           placeholder="Nhập tên đơn từ bạn muốn nộp" />
+                    <input type="text" id="tenDon" name="tenDon" class="form-control" placeholder="Nhập tên đơn từ bạn muốn nộp" />
                 </div>
                 <div class="col-md-4">
                     <label for="ghiChu" class="form-label">Ghi chú *</label>
-                    <input type="text"
-                           id="ghiChu"
-                           name="ghiChu"
-                           class="form-control"
-                           placeholder="Ghi chú" />
+                    <input type="text" id="ghiChu" name="ghiChu" class="form-control" placeholder="Ghi chú" />
                 </div>
                 <div class="col-md-4">
                     <label for="giaTien" class="form-label">Phí dịch vụ *</label>
-                    <input type="text"
-                           id="giaTien"
-                           name="giaTien"
-                           class="form-control"
-                           placeholder="Giá tiền" />
+                    <input type="text" id="giaTien" name="giaTien" class="form-control" placeholder="Giá tiền" />
                 </div>
             </div>
         </div>
+
+        <!-- CAPTCHA -->
+        <h3 style="red">@ViewBag.Error</h3>
+        <div class="card mb-4">
+            <div class="card-header">CAPTCHA Verification</div>
+            <div class="card-body row g-3">
+                <div class="col-md-4">
+                    <label for="captchaCode" class="form-label">Mã CAPTCHA *</label>
+                    <div class="d-flex">
+                        <input type="text" id="captchaCode" name="captchaCode" class="form-control" placeholder="Nhập mã CAPTCHA" required/>
+                        <span class="ms-3 align-self-center" style="font-weight: bold; font-size: 1.2em;">
+                            @ViewBag.CaptchaCode
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Nộp hồ sơ</button>
         </div>

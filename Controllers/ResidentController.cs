@@ -1,65 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using SWD392_PublicService.Services;
 using SWD392_PublicService.Models;
 
 namespace SWD392_PublicService.Controllers
 {
     public class ResidentController : Controller
     {
-        private readonly Swd392PublicSystemContext _context;
+        private readonly ICaptchaService _captchaService;
+        private readonly IApplicationService _applicationService;
 
-        public ResidentController(Swd392PublicSystemContext context)
+        public ResidentController(ICaptchaService captchaService, IApplicationService applicationService)
         {
-            _context = context;
-        }
-
-        
-        public IActionResult ListApplication()
-        {
-            return View();
+            _captchaService = captchaService;
+            _applicationService = applicationService;
         }
 
         public IActionResult SubmitApplication()
         {
+            ViewBag.CaptchaCode = _captchaService.GenerateCaptchaCode();
+            TempData["CaptchaCode"] = ViewBag.CaptchaCode;
             return View();
         }
 
         [HttpPost]
-        public IActionResult SubmitApplication(string quanHuyen, string coQuanThucHien, string hoVaTen, string gioiTinh, string soGiayTo, string tenDon, string ghiChu, string giaTien)
+        public IActionResult SubmitApplication(string quanHuyen, string coQuanThucHien, string hoVaTen, string gioiTinh, string soGiayTo, string tenDon, string ghiChu, string giaTien, string captchaCode)
         {
-            // Fix cứng UserId và ServiceId
-            int userId = 1;
-            int serviceId = 1;
-
-            // Tìm agencyId dựa trên tên cơ quan thực hiện
-            var agency = _context.ProcessingAgencies.FirstOrDefault(a => a.Name == coQuanThucHien);
-            if (agency == null)
+            // CAPTCHA verification
+            var storedCaptcha = TempData["CaptchaCode"] as string;
+            if (captchaCode != storedCaptcha)
             {
-                ModelState.AddModelError("coQuanThucHien", "Cơ quan thực hiện không hợp lệ.");
+                ViewBag.Error = "Mã CAPTCHA không hợp lệ.";
+                ViewBag.CaptchaCode = _captchaService.GenerateCaptchaCode();
+                TempData["CaptchaCode"] = ViewBag.CaptchaCode;
                 return View();
             }
 
-            // Tạo mới Application
-            var application = new Application
+            if (_applicationService.SaveApplication(coQuanThucHien, tenDon, ghiChu, decimal.Parse(giaTien)))
             {
-                UserId = userId,
-                ServiceId = serviceId,
-                AgencyId = agency.AgencyId,
-                Name = tenDon,
-                Type = 0,
-                PaymentAmount = decimal.Parse(giaTien),
-                Note = ghiChu,
-                SubmissionDate = DateTime.Now,
-                Status = 0
-            };
+                ViewBag.Success = _applicationService.Message;
+            }
+            else
+            {
+                ModelState.AddModelError("coQuanThucHien", _applicationService.Message);
+                ViewBag.CaptchaCode = _captchaService.GenerateCaptchaCode();
+                TempData["CaptchaCode"] = ViewBag.CaptchaCode;
+            }
 
-            // Lưu vào database
-            _context.Applications.Add(application);
-            _context.SaveChanges();
-            // Điều hướng tới trang danh sách hoặc trang xác nhận
-            ViewBag.Success = "Successful!";
             return View();
         }
-
     }
 }

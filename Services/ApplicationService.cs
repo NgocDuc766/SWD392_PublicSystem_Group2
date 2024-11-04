@@ -1,52 +1,52 @@
 ﻿using SWD392_PublicService.Models;
+using System;
 
 namespace SWD392_PublicService.Services
 {
     public class ApplicationService : IApplicationService
     {
         private readonly Swd392PublicSystemContext _context;
-        // message variable for return
-        public string message = null;
+
+        public string Message { get; private set; } = null;
 
         public ApplicationService(Swd392PublicSystemContext context)
         {
             _context = context;
         }
 
-        public void SaveApplication(string applicationName, int applicationType, string note, decimal paymentAmount)
+        public bool SaveApplication(string coQuanThucHien, string tenDon, string ghiChu, decimal giaTien)
         {
-            if (string.IsNullOrEmpty(applicationName))
+            try
             {
-                try
+                var agency = _context.ProcessingAgencies.FirstOrDefault(a => a.Name == coQuanThucHien);
+                if (agency == null)
                 {
-                    // Tạo đối tượng Application để lưu vào database
-                    var application = new Application
-                    {
-                        Name = applicationName,
-                        Type = applicationType,
-                        Status = 0,
-                        Note = note,
-                        PaymentAmount = paymentAmount,
-                        SubmissionDate = DateTime.Now
-                    };
-
-                    // Thêm vào context và lưu thay đổi
-                    _context.Applications.Add(application);
-                    _context.SaveChanges();
-
-                    // Cập nhật thông báo thành công
-                    message = "Đơn từ đã được lưu thành công.";
+                    Message = "Cơ quan thực hiện không hợp lệ.";
+                    return false;
                 }
-                catch (Exception ex)
+
+                var application = new Application
                 {
-                    // Cập nhật thông báo lỗi nếu xảy ra lỗi khi lưu
-                    message = $"Có lỗi xảy ra khi lưu đơn từ: {ex.Message}";
-                }
+                    UserId = 1,
+                    ServiceId = 1,
+                    AgencyId = agency.AgencyId,
+                    Name = tenDon,
+                    Type = 0,
+                    PaymentAmount = giaTien,
+                    Note = ghiChu,
+                    SubmissionDate = DateTime.Now,
+                    Status = 0
+                };
+
+                _context.Applications.Add(application);
+                _context.SaveChanges();
+                Message = "Đơn từ đã được nộp thành công.";
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                // Nếu ValidateApplication trả về false, message đã được cập nhật trong hàm đó
-                message = "Tên đơn từ không hợp lệ.";
+                Message = $"Có lỗi xảy ra khi nộp đơn từ: {ex.Message}";
+                return false;
             }
         }
     }

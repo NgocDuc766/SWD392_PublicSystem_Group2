@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SWD392_PublicService.Models;
+using SWD392_PublicService.Services;
 
 namespace SWD392_PublicService
 {
@@ -13,6 +14,10 @@ namespace SWD392_PublicService
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<Swd392PublicSystemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyCnn")));
+            builder.Services.AddScoped<ICaptchaService, CaptchaService>();
+            builder.Services.AddScoped<IApplicationService, ApplicationService>();
+            
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

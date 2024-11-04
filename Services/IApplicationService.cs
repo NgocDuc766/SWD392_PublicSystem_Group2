@@ -2,6 +2,7 @@
 {
     public interface IApplicationService
     {
-        void SaveApplication(string applicationName, int applicationType, string note, decimal paymentAmount);
+        bool SaveApplication(string coQuanThucHien, string tenDon, string ghiChu, decimal giaTien);
+        string Message { get; }
     }
 }

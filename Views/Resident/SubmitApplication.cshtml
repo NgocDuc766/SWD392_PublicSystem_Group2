@@ -6,133 +6,124 @@
 }
 
 <div class="container my-4">
-    <h3 class="text-center">
-        Thủ tục: Cấp giấy xác nhận tình trạng hôn nhân
-    </h3>
-    <div class="text-center mb-3">
-        <span class="fw-bold">Bước 1:</span> Đăng ký tài khoản (nếu chưa có) và
-        đăng nhập &nbsp; | &nbsp;
-        <span class="fw-bold text-success">Bước 2:</span> Nhập thông tin và lưu
-        hồ sơ &nbsp; | &nbsp; <span class="fw-bold">Bước 3:</span> Gửi hồ sơ
-        &nbsp; | &nbsp; <span class="fw-bold">Bước 4:</span> Nhận kết quả hồ sơ
-    </div>
-
-    <!-- Cơ quan thực hiện -->
-    <div class="card mb-4">
-        <div class="card-header">Cơ quan thực hiện</div>
-        <div class="card-body row g-3">
-            <div class="col-md-4">
-                <label for="capThucHien" class="form-label">Cấp thực hiện *</label>
-                <select id="capThucHien" class="form-select">
-                    <option>Cấp Xã</option>
-                    <option>Cấp Huyện</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="quanHuyen" class="form-label">Quận/Huyện *</label>
-                <select id="quanHuyen" class="form-select">
-                    <option selected>--Chọn Quận/Huyện--</option>
-                    <!-- Options -->
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="coQuanThucHien" class="form-label">Cơ quan thực hiện *</label>
-                <select id="coQuanThucHien" class="form-select">
-                    <option selected>--Chọn đơn vị--</option>
-                    <!-- Options -->
-                </select>
-            </div>
+    <form asp-action="SubmitApplication" method="post">
+        <h3 class="text-center">
+            Nộp hồ sơ theo yêu cầu
+        </h3>
+        <div class="text-center mb-3">
+            <span class="fw-bold">Bước 1:</span> Đăng ký tài khoản (nếu chưa có) và
+            đăng nhập &nbsp; | &nbsp;
+            <span class="fw-bold text-success">Bước 2:</span> Nhập thông tin và lưu
+            hồ sơ &nbsp; | &nbsp; <span class="fw-bold">Bước 3:</span> Gửi hồ sơ
+            &nbsp; | &nbsp; <span class="fw-bold">Bước 4:</span> Nhận kết quả hồ sơ
         </div>
-    </div>
 
-    <!-- Thông tin người nộp hồ sơ -->
-    <div class="card mb-4">
-        <div class="card-header">Thông tin người nộp hồ sơ</div>
-        <div class="card-body row g-3">
-            <div class="col-md-4">
-                <label for="hoVaTen" class="form-label">Họ và tên *</label>
-                <input type="text"
-                       id="hoVaTen"
-                       class="form-control"
-                       placeholder="Họ Và Tên" />
-            </div>
-            <div class="col-md-4">
-                <label for="ngaySinh" class="form-label">Ngày, tháng, năm sinh *</label>
-                <div class="d-flex">
-                    <select class="form-select me-1" id="ngay">
-                        <!-- Ngày Options -->
+        <!-- Cơ quan thực hiện -->
+        <div class="card mb-4">
+            <div class="card-header">Cơ quan thực hiện</div>
+            <div class="card-body row g-3">
+                <div class="col-md-4">
+                    <label for="capThucHien" class="form-label">Cấp thực hiện *</label>
+                    <select id="capThucHien" name="capThucHien" class="form-select">
+                        <option value="" selected>-- Chọn cấp thực hiện --</option>
+                        <option>Cấp Xã</option>
+                        <option>Cấp Huyện</option>
                     </select>
-                    <select class="form-select me-1" id="thang">
-                        <!-- Tháng Options -->
+                </div>
+                <div class="col-md-4">
+                    <label for="quanHuyen" class="form-label">Quận/Huyện *</label>
+                    <select id="quanHuyen" name="quanHuyen" class="form-select">
+                        <option value="" selected>-- Chọn quận/huyện/xã/phường --</option>
+                        <option value="Quận Hoàn Kiếm">Quận Hoàn Kiếm</option>
+                        <option value="Quận Ba Đình">Quận Ba Đình</option>
+                        <option value="Quận Hai Bà Trưng">Quận Hai Bà Trưng</option>
+                        <option value="Huyện Đông Anh">Huyện Đông Anh</option>
+                        <option value="Huyện Thạch Thất">Huyện Thạch Thất</option>
+                        <option value="Xã Thạch Hòa">Xã Thạch Hòa</option>
+                        <option value="Phường Kim Mã">Phường Kim Mã</option>
                     </select>
-                    <select class="form-select" id="nam">
-                        <!-- Năm Options -->
+                </div>
+                <div class="col-md-4">
+                    <label for="coQuanThucHien" class="form-label">Cơ quan thực hiện *</label>
+                    <select id="coQuanThucHien" name="coQuanThucHien" class="form-select">
+                        <option value="" selected>-- Chọn cơ quan thực hiện --</option>
+                        <option value="Ủy ban nhân dân phường Tràng Tiền">Ủy ban nhân dân phường Tràng Tiền</option>
+                        <option value="Ủy ban nhân dân quận Ba Đình">Ủy ban nhân dân quận Ba Đình</option>
+                        <option value="Ủy ban nhân dân phường Bạch Mai">Ủy ban nhân dân phường Bạch Mai</option>
+                        <option value="Ủy ban nhân dân huyện Đông Anh">Ủy ban nhân dân huyện Đông Anh</option>
+                        <option value="Ủy ban nhân dân huyện Thạch Thất">Ủy ban nhân dân huyện Thạch Thất</option>
+                        <option value="Ủy ban nhân dân xã Thạch Hòa">Ủy ban nhân dân xã Thạch Hòa</option>
+                        <option value="Ủy ban nhân dân phường Kim Mã">Ủy ban nhân dân phường Kim Mã</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <label for="gioiTinh" class="form-label">Giới tính</label>
-                <select id="gioiTinh" class="form-select">
-                    <option>Nam</option>
-                    <option>Nữ</option>
-                </select>
-            </div>
-@*             <div class="col-md-4">
-                <label for="loaiGiayTo" class="form-label">Loại giấy tờ *</label>
-                <select id="loaiGiayTo" class="form-select">
-                    <option selected>Thẻ căn cước công dân</option>
-                    <!-- Options -->
-                </select>
-            </div> *@
-            <div class="col-md-4">
-                <label for="soGiayTo" class="form-label">Số giấy tờ</label>
-                <input type="text"
-                       id="soGiayTo"
-                       class="form-control"
-                       placeholder="" />
-            </div>
-            @* <div class="col-md-4">
-                <label for="email" class="form-label">Thư điện tử</label>
-                <input type="email" id="email" class="form-control" />
-            </div> *@
         </div>
-    </div>
 
-    <!-- Địa chỉ thường trú -->
-    <div class="card mb-4">
-        <div class="card-header">Địa chỉ thường trú</div>
-        <div class="card-body row g-3">
-            <div class="col-md-4">
-                <label for="tinhThanhPho" class="form-label">Tỉnh/Thành phố *</label>
-                <select id="tinhThanhPho" class="form-select">
-                    <option selected>Thành Phố Hà Nội</option>
-                    <!-- Options -->
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="quanHuyenThuongTru" class="form-label">Quận/Huyện *</label>
-                <select id="quanHuyenThuongTru" class="form-select">
-                    <option selected>Huyện Đại Từ</option>
-                    <!-- Options -->
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label for="soNha" class="form-label">Số nhà/đường/phố *</label>
-                <input type="text"
-                       id="soNha"
-                       class="form-control"
-                       placeholder="Nhập địa chỉ của bạn" />
+        <!-- Thông tin người nộp hồ sơ -->
+        <div class="card mb-4">
+            <div class="card-header">Thông tin người nộp hồ sơ</div>
+            <div class="card-body row g-3">
+                <div class="col-md-4">
+                    <label for="hoVaTen" class="form-label">Họ và tên *</label>
+                    <input type="text"
+                           id="hoVaTen"
+                           name="hoVaTen"
+                           class="form-control"
+                           placeholder="Họ Và Tên" />
+                </div>
+                <div class="col-md-4">
+                    <label for="gioiTinh" class="form-label">Giới tính</label>
+                    <select id="gioiTinh" name="gioiTinh" class="form-select">
+                        <option>Nam</option>
+                        <option>Nữ</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="soGiayTo" class="form-label">Số giấy tờ</label>
+                    <input type="text"
+                           id="soGiayTo"
+                           name="soGiayTo"
+                           class="form-control"
+                           placeholder="" />
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Các trường hợp đặc biệt -->
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="uyQuyenKhac" />
-        <label class="form-check-label" for="uyQuyenKhac">Trường hợp được người khác ủy quyền cho thực hiện thủ tục</label>
-    </div>
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="uyQuyenCongTy" />
-        <label class="form-check-label" for="uyQuyenCongTy">Trường hợp được công ty ủy quyền cho thực hiện thủ tục</label>
-    </div>
+        <!-- Địa chỉ thường trú -->
+        <div class="card mb-4">
+            <div class="card-header">Thông tin đơn từ</div>
+            <div class="card-body row g-3">
+                <div class="col-md-4">
+                    <label for="tenDon" class="form-label">Tên đơn từ *</label>
+                    <input type="text"
+                           id="tenDon"
+                           name="tenDon"
+                           class="form-control"
+                           placeholder="Nhập tên đơn từ bạn muốn nộp" />
+                </div>
+                <div class="col-md-4">
+                    <label for="ghiChu" class="form-label">Ghi chú *</label>
+                    <input type="text"
+                           id="ghiChu"
+                           name="ghiChu"
+                           class="form-control"
+                           placeholder="Ghi chú" />
+                </div>
+                <div class="col-md-4">
+                    <label for="giaTien" class="form-label">Phí dịch vụ *</label>
+                    <input type="text"
+                           id="giaTien"
+                           name="giaTien"
+                           class="form-control"
+                           placeholder="Giá tiền" />
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Nộp hồ sơ</button>
+        </div>
+        <div>
+            <h3 style="color: green">@ViewBag.Success</h3>
+        </div>
+    </form>
 </div>

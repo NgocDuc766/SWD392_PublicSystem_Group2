@@ -15,7 +15,7 @@ namespace SWD392_PublicService.Services
 
         public void SaveApplication(string applicationName, int applicationType, string note, decimal paymentAmount)
         {
-            if (ValidateApplication(applicationName))
+            if (string.IsNullOrEmpty(applicationName))
             {
                 try
                 {
@@ -48,16 +48,6 @@ namespace SWD392_PublicService.Services
                 // Nếu ValidateApplication trả về false, message đã được cập nhật trong hàm đó
                 message = "Tên đơn từ không hợp lệ.";
             }
-        }
-
-        public bool ValidateApplication(string applicationName)
-        {
-            
-            if(string.IsNullOrEmpty(applicationName))
-            {
-                return false;
-            }
-            return true;
         }
     }
 }
